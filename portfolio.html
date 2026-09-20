@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Josna Fernandes — Product Design Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F2F4F7;--surface:#FFFFFF;--ink:#10162F;--muted:#535C7A;--line:#D3D9E6;--accent:#0E7C6B;--accent-ink:#FFFFFF;--soft:#E3F1EE;
+--display:"Bricolage Grotesque","Trebuchet MS",Arial,sans-serif;--body:"Public Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1420;--surface:#171E2E;--ink:#E8ECF6;--muted:#9AA4C0;--line:#2A3348;--accent:#3FD1B0;--accent-ink:#0F1420;--soft:#153229}}
+:root[data-theme="dark"]{--bg:#0F1420;--surface:#171E2E;--ink:#E8ECF6;--muted:#9AA4C0;--line:#2A3348;--accent:#3FD1B0;--accent-ink:#0F1420;--soft:#153229}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+.logo{font:700 18px var(--display);text-decoration:none}
+nav a{margin-left:22px;text-decoration:none;font-weight:500;font-size:15px;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+h1,h2,h3{font-family:var(--display);line-height:1.08;margin:0;letter-spacing:-.02em}
+h1{font-size:clamp(40px,7vw,76px);font-weight:700}
+h2{font-size:clamp(28px,4vw,40px);font-weight:700}
+h3{font-size:22px;font-weight:700;letter-spacing:-.01em}
+p{margin:0 0 14px;max-width:66ch}
+.muted{color:var(--muted)}
+/* hero */
+.hero{padding:64px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:center}
+.hero p.lead{font-size:20px;margin-top:22px;max-width:52ch}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-block;padding:12px 20px;border-radius:8px;font-weight:600;text-decoration:none;border:1.5px solid var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+/* phone toggle */
+.stage{display:flex;flex-direction:column;align-items:center;gap:14px}
+.seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;padding:3px;background:var(--surface)}
+.seg button{font:600 14px var(--body);border:0;background:transparent;color:var(--ink);padding:7px 16px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.phone{width:264px;height:480px;border:2px solid var(--ink);border-radius:32px;padding:22px 18px;background:var(--surface);display:flex;flex-direction:column;gap:14px;transition:background .3s}
+.phone .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.phone .bar i{display:block;height:100%;width:33%;background:var(--accent);transition:width .3s}
+.phone h4{margin:6px 0 0;font:700 20px var(--display);line-height:1.15}
+.phone .hint{font-size:13px;color:var(--muted);margin:0}
+.field{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:15px}
+.field small{display:block;color:var(--muted);font-size:11px}
+.err{font-size:12px;color:#B3261E;margin:-6px 0 0}
+.pbtn{margin-top:auto;text-align:center;padding:13px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:15px;transition:all .3s}
+.tick{display:flex;gap:10px;align-items:center;font-size:13px}
+.tick b{width:18px;height:18px;border-radius:50%;background:var(--accent);flex:none;transition:all .3s}
+.phone[data-mode="wire"]{background:transparent}
+.phone[data-mode="wire"] *{font-family:"Courier New",monospace !important}
+.phone[data-mode="wire"] .pbtn{background:transparent;color:var(--ink);border:1.5px dashed var(--ink)}
+.phone[data-mode="wire"] .field{border-style:dashed;border-color:var(--ink);border-radius:2px}
+.phone[data-mode="wire"] .tick b{background:transparent;border:1.5px dashed var(--ink);border-radius:2px}
+.phone[data-mode="wire"] .bar{background:transparent;border:1px dashed var(--ink)}
+.phone[data-mode="wire"] .bar i{background:var(--ink)}
+.phone[data-mode="wire"] .err{color:var(--ink)}
+.phone[data-mode="wire"] .field,.phone[data-mode="wire"] .pbtn{border-radius:2px}
+.note{font-size:13px;color:var(--muted);text-align:center;max-width:32ch;margin:0}
+/* sections */
+section{padding:72px 0;border-top:1px solid var(--line)}
+.sec-head{margin-bottom:36px}
+.sec-head p{margin-top:12px}
+.case{display:grid;grid-template-columns:240px 1fr;gap:48px;margin-top:8px}
+.meta{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);align-self:start;font-size:15px}
+.meta dt{font-weight:600;margin-top:14px}
+.meta dd{margin:2px 0 0;color:var(--muted)}
+.meta dt:first-child{margin-top:0}
+.case h3{margin:34px 0 10px}
+.case h3:first-child{margin-top:0}
+.decide{margin:16px 0;border-left:3px solid var(--accent);padding:2px 0 2px 18px}
+.decide b{display:block}
+.frames{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:22px 0 14px}
+.frame{margin:0;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--surface)}
+.frame svg{width:100%;height:auto;display:block}
+.frame figcaption{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4}
+.small{font-size:13px;margin:-8px 0 12px}
+.hbox{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.hacc{fill:var(--accent);stroke:none}
+.hsoft{fill:var(--soft);stroke:none}
+.wbox{fill:none;stroke:var(--ink);stroke-width:1.1;stroke-dasharray:4 3}
+.wfill{fill:var(--line)}
+.ln{stroke:var(--ink);stroke-width:1.2}
+.ah{fill:var(--ink)}
+.t{fill:var(--ink);font:500 10px var(--body)}
+.tb{fill:var(--ink);font:700 10px var(--body)}
+.tm{fill:var(--muted);font:400 9.5px var(--body)}
+.tp{fill:#fff;font:600 8px var(--body)}
+.tw{fill:var(--accent-ink);font:600 10px var(--body)}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin:18px 0 6px}
+.facts div{font-size:14px;color:var(--muted)}
+.facts strong{display:block;font:700 30px var(--display);color:var(--ink)}
+.case+.case{margin-top:0}
+.proc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+.proc h3{font-size:19px;margin-bottom:6px}
+.proc p{font-size:16px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.about ul{margin:0;padding-left:18px}
+.about li{margin-bottom:8px}
+footer{padding:48px 0 64px;border-top:1px solid var(--line)}
+footer a{font-weight:600}
+@media (max-width:820px){.hero .wrap,.case,.about{grid-template-columns:1fr}.meta{position:static}.hero{padding-top:40px}nav a{margin-left:14px}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap"><a class="logo" href="#top">Josna Fernandes</a>
+<nav aria-label="Primary"><a href="#work">Work</a><a href="#process">Process</a><a href="#about">About</a><a href="#contact">Contact</a></nav></div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+ <div>
+  <h1>I design the flow first, then build it.</h1>
+  <p class="lead">I'm a final-year Computer Science student who does product design: user flows, wireframes, prototypes and design systems in Figma, validated with real users and shipped in React. Currently designing and building at Agremate.</p>
+  <div class="cta"><a class="btn primary" href="#work">See case studies</a><a class="btn" href="#contact">Get in touch</a></div>
+ </div>
+ <div class="stage">
+  <div class="seg" role="group" aria-label="Design fidelity">
+   <button type="button" id="bWire" aria-pressed="true">Wireframe</button>
+   <button type="button" id="bHi" aria-pressed="false">High-fidelity</button>
+  </div>
+  <div class="phone" id="phone" data-mode="wire" aria-label="Illustrative identity verification screen">
+   <div class="bar"><i></i></div>
+   <h4>Verify your identity</h4>
+   <p class="hint">Step 1 of 3. We'll send a code to the mobile number linked to your Aadhaar.</p>
+   <div class="field"><small>Aadhaar number</small>1234 5678 90</div>
+   <p class="err">Aadhaar must be 12 digits. Check and try again.</p>
+   <div class="tick"><b></b>Your data stays encrypted</div>
+   <div class="pbtn">Send code</div>
+  </div>
+  <p class="note">Illustrative recreation of a KYC step, showing the same screen at two stages of design.</p>
+ </div>
+</div></div>
+
+<section id="work"><div class="wrap">
+ <div class="sec-head"><h2>Case studies</h2><p class="muted">Three projects. Each one covers the problem, who it was for, the decisions I made and why.</p></div>
+
+ <!-- CASE 1 -->
+ <article class="case" id="agremate">
+  <dl class="meta">
+   <dt>Project</dt><dd>Agremate community platform</dd>
+   <dt>Role</dt><dd>Product &amp; UI designer and full-stack developer (intern)</dd>
+   <dt>Timeline</dt><dd>Jun 2026 to present</dd>
+   <dt>Tools</dt><dd>Figma, React.js, Tailwind CSS, Node.js, Anthropic Claude API</dd>
+   <dt>Scope</dt><dd>7 modules</dd>
+  </dl>
+  <div>
+   <h3>Problem</h3>
+   <p>The platform needed seven different features (posts, reviews, ticketing, a vendor marketplace, in-house ads, identity verification and an AI chatbot) that would be used by very different people, yet had to feel like one product.</p>
+   <h3>Users</h3>
+   <p>Community members who post and review, vendors who list services, and admins who handle support. Each has a different goal and a different tolerance for friction.</p>
+   <h3>Process</h3>
+   <p>I mapped the user flow for each module first, sketched low-fidelity wireframes to settle structure and priority, then moved to high-fidelity screens and clickable Figma prototypes. Prototypes went to product and engineering teammates for review before anything was built in React.</p>
+   <div class="frames"><figure class="frame"><svg viewBox="0 0 300 190" role="img" aria-label="User flow from sign in to payment with an error recovery path" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><rect x="8" y="40" width="62" height="34" rx="4" class="hbox" /><text x="39" y="61" class="t" text-anchor="middle">Sign in</text><line x1="70" y1="57" x2="82" y2="57" class="ln" marker-end="url(#ar)"/><rect x="82" y="40" width="62" height="34" rx="4" class="hbox" /><text x="113" y="61" class="t" text-anchor="middle">Pick module</text><line x1="144" y1="57" x2="156" y2="57" class="ln" marker-end="url(#ar)"/><rect x="156" y="40" width="62" height="34" rx="4" class="hacc" /><text x="187" y="61" class="tw" text-anchor="middle">Verify ID</text><line x1="218" y1="57" x2="230" y2="57" class="ln" marker-end="url(#ar)"/><rect x="230" y="40" width="62" height="34" rx="4" class="hbox" /><text x="261" y="61" class="t" text-anchor="middle">Pay</text><rect x="156" y="116" width="62" height="34" rx="4" class="wbox" /><text x="187" y="137" class="t" text-anchor="middle">Fix &amp; retry</text><line x1="187" y1="74" x2="187" y2="116" class="ln" marker-end="url(#ar)"/><rect x="230" y="116" width="62" height="34" rx="4" class="hbox" /><text x="261" y="137" class="t" text-anchor="middle">Done</text><line x1="261" y1="74" x2="261" y2="116" class="ln" marker-end="url(#ar)"/><text x="8" y="20" class="tm" text-anchor="start">Core user flow: identity and payment</text><text x="8" y="178" class="tm" text-anchor="start">Errors return the user to the same step</text></svg><figcaption>User flow: sign in to payment, with error recovery</figcaption></figure><figure class="frame"><svg viewBox="0 0 300 190" role="img" aria-label="Low-fidelity wireframe of a three-column ticket board" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><text x="8" y="16" class="t" text-anchor="start">Ticket Manager</text><text x="8" y="36" class="tm" text-anchor="start">Open</text><rect x="8" y="44" width="92" height="56" rx="4" class="wbox" /><rect x="16" y="54" width="54" height="6" rx="2" class="wfill" /><rect x="16" y="68" width="72" height="6" rx="2" class="wfill" /><rect x="16" y="82" width="28" height="8" rx="2" class="wbox" /><rect x="8" y="108" width="92" height="56" rx="4" class="wbox" /><rect x="16" y="118" width="54" height="6" rx="2" class="wfill" /><rect x="16" y="132" width="72" height="6" rx="2" class="wfill" /><rect x="16" y="146" width="28" height="8" rx="2" class="wbox" /><text x="104" y="36" class="tm" text-anchor="start">In progress</text><rect x="104" y="44" width="92" height="56" rx="4" class="wbox" /><rect x="112" y="54" width="54" height="6" rx="2" class="wfill" /><rect x="112" y="68" width="72" height="6" rx="2" class="wfill" /><rect x="112" y="82" width="28" height="8" rx="2" class="wbox" /><rect x="104" y="108" width="92" height="56" rx="4" class="wbox" /><rect x="112" y="118" width="54" height="6" rx="2" class="wfill" /><rect x="112" y="132" width="72" height="6" rx="2" class="wfill" /><rect x="112" y="146" width="28" height="8" rx="2" class="wbox" /><text x="200" y="36" class="tm" text-anchor="start">Resolved</text><rect x="200" y="44" width="92" height="56" rx="4" class="wbox" /><rect x="208" y="54" width="54" height="6" rx="2" class="wfill" /><rect x="208" y="68" width="72" height="6" rx="2" class="wfill" /><rect x="208" y="82" width="28" height="8" rx="2" class="wbox" /><rect x="200" y="108" width="92" height="56" rx="4" class="wbox" /><rect x="208" y="118" width="54" height="6" rx="2" class="wfill" /><rect x="208" y="132" width="72" height="6" rx="2" class="wfill" /><rect x="208" y="146" width="28" height="8" rx="2" class="wbox" /></svg><figcaption>Low-fidelity wireframe: three-column Ticket Manager</figcaption></figure><figure class="frame"><svg viewBox="0 0 300 190" role="img" aria-label="High-fidelity ticket board with priority chips and SLA times" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><text x="8" y="16" class="tb" text-anchor="start">Ticket Manager</text><text x="8" y="36" class="tb" text-anchor="start">Open</text><rect x="8" y="44" width="92" height="56" rx="4" class="hbox" /><rect x="16" y="52" width="26" height="12" rx="6" style="fill:#B3261E"/><text x="29" y="61" class="tp" text-anchor="middle" style="font-size:8px">High</text><text x="16" y="79" class="t" text-anchor="start" style="font-size:8.5px">Payment not received</text><text x="16" y="92" class="tm" text-anchor="start" style="font-size:8.5px">SLA 2h</text><rect x="8" y="108" width="92" height="56" rx="4" class="hbox" /><rect x="16" y="116" width="26" height="12" rx="6" style="fill:var(--accent)"/><text x="29" y="125" class="tp" text-anchor="middle" style="font-size:8px">Low</text><text x="16" y="143" class="t" text-anchor="start" style="font-size:8.5px">Update phone number</text><text x="16" y="156" class="tm" text-anchor="start" style="font-size:8.5px">SLA 2d</text><text x="104" y="36" class="tb" text-anchor="start">In progress</text><rect x="104" y="44" width="92" height="56" rx="4" class="hbox" /><rect x="112" y="52" width="26" height="12" rx="6" style="fill:#B3261E"/><text x="125" y="61" class="tp" text-anchor="middle" style="font-size:8px">High</text><text x="112" y="79" class="t" text-anchor="start" style="font-size:8.5px">Listing rejected</text><text x="112" y="92" class="tm" text-anchor="start" style="font-size:8.5px">SLA 4h</text><rect x="104" y="108" width="92" height="56" rx="4" class="hbox" /><rect x="112" y="116" width="26" height="12" rx="6" style="fill:#B7791F"/><text x="125" y="125" class="tp" text-anchor="middle" style="font-size:8px">Med</text><text x="112" y="143" class="t" text-anchor="start" style="font-size:8.5px">Refund status</text><text x="112" y="156" class="tm" text-anchor="start" style="font-size:8.5px">SLA 1d</text><text x="200" y="36" class="tb" text-anchor="start">Resolved</text><rect x="200" y="44" width="92" height="56" rx="4" class="hbox" /><rect x="208" y="52" width="26" height="12" rx="6" style="fill:var(--accent)"/><text x="221" y="61" class="tp" text-anchor="middle" style="font-size:8px">Low</text><text x="208" y="79" class="t" text-anchor="start" style="font-size:8.5px">Review removed</text><text x="208" y="92" class="tm" text-anchor="start" style="font-size:8.5px">Done</text><rect x="200" y="108" width="92" height="56" rx="4" class="hbox" /><rect x="208" y="116" width="26" height="12" rx="6" style="fill:var(--accent)"/><text x="221" y="125" class="tp" text-anchor="middle" style="font-size:8px">Low</text><text x="208" y="143" class="t" text-anchor="start" style="font-size:8.5px">Ad approved</text><text x="208" y="156" class="tm" text-anchor="start" style="font-size:8.5px">Done</text></svg><figcaption>High-fidelity: priority and SLA visible on every card</figcaption></figure></div><p class="muted small">Wireframes and screens recreated for this case study. Ticket titles are sample content.</p>
+   <h3>Key decisions</h3>
+   <div class="decide"><b>Ticket Manager as a Kanban board</b>Support issues are easiest to act on when priority, status and SLA are visible at a glance, so each ticket card carries all three instead of hiding them in a detail page.</div>
+   <div class="decide"><b>Identity and payment as guided steps</b>Aadhaar KYC and Razorpay checkout are high-anxiety moments. I broke them into short steps with a progress indicator and wrote error messages that say what went wrong and how to fix it.</div>
+   <div class="decide"><b>Chatbot with a clear handoff</b>The AI chatbot answers FAQs and looks up services, but ticket creation runs on deterministic backend logic, so users always know when a real support ticket has been raised.</div>
+   <div class="decide"><b>One set of components</b>Reusable components and Tailwind tokens for color, type and spacing keep all seven modules consistent and make each new screen faster to build.</div>
+   <h3>Outcome</h3>
+   <p>All seven modules shipped in one consistent interface. The Figma files double as the reference for developers, so design and build stay in step.</p>
+   <h3>What I'd improve next</h3>
+   <p>Run moderated usability sessions on the KYC flow and measure drop-off per step, then use that data to shorten the longest one.</p>
+  </div>
+ </article>
+</div></section>
+
+<section><div class="wrap">
+ <article class="case" id="jaldrishti">
+  <dl class="meta">
+   <dt>Project</dt><dd>JalDrishti, disease early warning dashboard</dd>
+   <dt>Role</dt><dd>UX design, data pipeline and dashboard build</dd>
+   <dt>Year</dt><dd>2026</dd>
+   <dt>Tools</dt><dd>Figma, Streamlit, Python, scikit-learn, XGBoost, Google Earth Engine</dd>
+  </dl>
+  <div>
+   <h3>Problem</h3>
+   <p>Waterborne disease outbreaks are usually noticed after people fall sick. Public satellite data can signal risk earlier, but raw model scores mean nothing to a district health officer.</p>
+   <h3>Users</h3>
+   <p>District officials and policymakers who need to decide where to act, often with little time and no data-science background.</p>
+   <div class="facts"><div><strong>2–4 weeks</strong>advance warning of outbreaks</div><div><strong>5 layers</strong>from satellite data to dashboard</div></div>
+   <h3>Process</h3>
+   <p>I started from the decision the user has to make (which district needs attention first?) and worked backwards to the screen. I wireframed the layout in Figma, tested the information hierarchy against that one question, then built it in Streamlit.</p>
+   <div class="frames"><figure class="frame"><svg viewBox="0 0 300 190" role="img" aria-label="Chain from satellite data up to a decision" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><rect x="20" y="148" width="260" height="32" rx="4" class="hbox" /><text x="150" y="168" class="t" text-anchor="middle">Satellite data (Google Earth Engine)</text><rect x="20" y="102" width="260" height="32" rx="4" class="hbox" /><text x="150" y="122" class="t" text-anchor="middle">Risk score for each district</text><rect x="20" y="56" width="260" height="32" rx="4" class="hbox" /><text x="150" y="76" class="t" text-anchor="middle">Ranked district list</text><rect x="20" y="10" width="260" height="32" rx="4" class="hacc" /><text x="150" y="30" class="tw" text-anchor="middle">Decision: which district needs attention first?</text><line x1="150" y1="148" x2="150" y2="134" class="ln" marker-end="url(#ar)"/><line x1="150" y1="102" x2="150" y2="88" class="ln" marker-end="url(#ar)"/><line x1="150" y1="56" x2="150" y2="42" class="ln" marker-end="url(#ar)"/></svg><figcaption>Designed backwards: start from the decision, end at the data</figcaption></figure><figure class="frame"><svg viewBox="0 0 300 190" role="img" aria-label="Low-fidelity wireframe of a dashboard with alert banner, ranked list and map" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><rect x="10" y="8" width="280" height="26" rx="4" class="wbox" /><text x="20" y="25" class="tm" text-anchor="start">Alert banner</text><rect x="10" y="42" width="112" height="140" rx="4" class="wbox" /><rect x="18" y="52" width="96" height="24" rx="4" class="wbox" /><rect x="24" y="58" width="40" height="5" rx="2" class="wfill" /><rect x="24" y="68" width="70" height="4" rx="2" class="wfill" /><rect x="18" y="84" width="96" height="24" rx="4" class="wbox" /><rect x="24" y="90" width="40" height="5" rx="2" class="wfill" /><rect x="24" y="100" width="70" height="4" rx="2" class="wfill" /><rect x="18" y="116" width="96" height="24" rx="4" class="wbox" /><rect x="24" y="122" width="40" height="5" rx="2" class="wfill" /><rect x="24" y="132" width="70" height="4" rx="2" class="wfill" /><rect x="18" y="148" width="96" height="24" rx="4" class="wbox" /><rect x="24" y="154" width="40" height="5" rx="2" class="wfill" /><rect x="24" y="164" width="70" height="4" rx="2" class="wfill" /><rect x="130" y="42" width="160" height="140" rx="4" class="wbox" /><line x1="130" y1="42" x2="290" y2="182" class="ln"/><line x1="290" y1="42" x2="130" y2="182" class="ln"/><text x="210" y="114" class="tm" text-anchor="middle">Map</text></svg><figcaption>Low-fidelity wireframe: alert first, ranked list, map for context</figcaption></figure><figure class="frame"><svg viewBox="0 0 300 190" role="img" aria-label="High-fidelity dashboard with ranked districts and a detail panel" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><rect x="10" y="8" width="280" height="26" rx="4" class="hsoft" /><text x="20" y="25" class="tb" text-anchor="start" style="font-size:9.5px">3 districts need attention in the next 2–4 weeks</text><rect x="10" y="42" width="150" height="140" rx="4" class="hbox" /><text x="18" y="63" class="tb" text-anchor="start" style="font-size:9.5px">District A</text><text x="152" y="63" class="tm" text-anchor="end" style="font-size:9px">High</text><rect x="18" y="68" width="134" height="6" rx="3" class="wfill" /><rect x="18" y="68" width="120.60000000000001" height="6" rx="3" style="fill:#B3261E"/><text x="18" y="95" class="tb" text-anchor="start" style="font-size:9.5px">District B</text><text x="152" y="95" class="tm" text-anchor="end" style="font-size:9px">High</text><rect x="18" y="100" width="134" height="6" rx="3" class="wfill" /><rect x="18" y="100" width="104.52000000000001" height="6" rx="3" style="fill:#B3261E"/><text x="18" y="127" class="tb" text-anchor="start" style="font-size:9.5px">District C</text><text x="152" y="127" class="tm" text-anchor="end" style="font-size:9px">Medium</text><rect x="18" y="132" width="134" height="6" rx="3" class="wfill" /><rect x="18" y="132" width="67.0" height="6" rx="3" style="fill:#B7791F"/><text x="18" y="159" class="tb" text-anchor="start" style="font-size:9.5px">District D</text><text x="152" y="159" class="tm" text-anchor="end" style="font-size:9px">Low</text><rect x="18" y="164" width="134" height="6" rx="3" class="wfill" /><rect x="18" y="164" width="26.8" height="6" rx="3" style="fill:var(--accent)"/><rect x="168" y="42" width="122" height="140" rx="4" class="hbox" /><text x="178" y="62" class="tb" text-anchor="start" style="font-size:10px">District A</text><text x="178" y="80" class="tm" text-anchor="start" style="font-size:9px">Expected rise in</text><text x="178" y="92" class="tm" text-anchor="start" style="font-size:9px">cases in 2–4 weeks</text><rect x="178" y="110" width="102" height="28" rx="4" class="hacc" /><text x="229" y="128" class="tw" text-anchor="middle" style="font-size:9px">Check water sources</text><text x="178" y="160" class="tm" text-anchor="start" style="font-size:8.5px">Contributing factors</text><text x="178" y="172" class="t" text-anchor="start" style="font-size:8.5px">Rainfall · Surface water</text></svg><figcaption>High-fidelity: risk levels first, action in the detail panel</figcaption></figure></div><p class="muted small">District names and risk levels are sample data used to show the layout.</p>
+   <h3>Key decisions</h3>
+   <div class="decide"><b>Alerts by district, not by model output</b>The dashboard shows district-level warnings ranked by risk. Probabilities and features stay one layer down for those who want them.</div>
+   <div class="decide"><b>Lead with the action</b>Each alert opens with what to watch and when, since the 2–4 week lead time is the most useful thing the system offers.</div>
+   <h3>Outcome</h3>
+   <p>A working end-to-end pipeline and an interactive dashboard that turns public satellite data into district-level early warnings.</p>
+   <h3>What I'd improve next</h3>
+   <p>Test the alert wording with actual health officers and check that the risk levels are read the way I intended.</p>
+  </div>
+ </article>
+</div></section>
+
+<section><div class="wrap">
+ <article class="case" id="nullbreach">
+  <dl class="meta">
+   <dt>Project</dt><dd>NullBreach, AI-powered security scanner</dd>
+   <dt>Role</dt><dd>Interaction design and full-stack build</dd>
+   <dt>Year</dt><dd>2026</dd>
+   <dt>Tools</dt><dd>Figma, React, Python, Mistral AI, OWASP Top 10</dd>
+  </dl>
+  <div>
+   <h3>Problem</h3>
+   <p>Security scanners tend to produce long lists of findings, many of them false positives. Developers learn to ignore them, which defeats the purpose.</p>
+   <h3>Users</h3>
+   <p>Developers checking their own web applications against the OWASP Top 10 while they build.</p>
+   <div class="facts"><div><strong>3</strong>interfaces: web, API, VS Code</div><div><strong>12 agents</strong>in a 6-phase pipeline</div></div>
+   <h3>Process</h3>
+   <p>I mapped where a developer already works (the editor, the browser, the CI pipeline) and designed one interaction model that carries across all three interfaces, so learning one means knowing the others. Wireframes for the dashboard and results views came first, then a prototype, then the build.</p>
+   <div class="frames"><figure class="frame"><svg viewBox="0 0 300 190" role="img" aria-label="Three interfaces feeding one shared finding format" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><rect x="10" y="20" width="110" height="32" rx="4" class="hbox" /><text x="65" y="40" class="t" text-anchor="middle">Web dashboard</text><line x1="120" y1="36" x2="168" y2="95" class="ln" marker-end="url(#ar)"/><rect x="10" y="72" width="110" height="32" rx="4" class="hbox" /><text x="65" y="92" class="t" text-anchor="middle">REST API</text><line x1="120" y1="88" x2="168" y2="95" class="ln" marker-end="url(#ar)"/><rect x="10" y="124" width="110" height="32" rx="4" class="hbox" /><text x="65" y="144" class="t" text-anchor="middle">VS Code extension</text><line x1="120" y1="140" x2="168" y2="95" class="ln" marker-end="url(#ar)"/><rect x="170" y="42" width="120" height="106" rx="4" class="hacc" /><text x="230" y="66" class="tw" text-anchor="middle" style="font-size:10.5px">One finding format</text><text x="230" y="92" class="tw" text-anchor="middle" style="font-size:10px">Severity</text><text x="230" y="112" class="tw" text-anchor="middle" style="font-size:10px">Confidence</text><text x="230" y="132" class="tw" text-anchor="middle" style="font-size:10px">Suggested fix</text></svg><figcaption>One interaction model across all three interfaces</figcaption></figure><figure class="frame"><svg viewBox="0 0 300 190" role="img" aria-label="Low-fidelity wireframe of a scan results list" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><text x="8" y="16" class="tm" text-anchor="start">Scan results</text><rect x="8" y="26" width="284" height="32" rx="4" class="wbox" /><rect x="16" y="36" width="12" height="12" rx="2" class="wbox" /><rect x="38" y="36" width="120" height="5" rx="2" class="wfill" /><rect x="38" y="46" width="80" height="4" rx="2" class="wfill" /><rect x="220" y="38" width="64" height="8" rx="2" class="wbox" /><rect x="8" y="66" width="284" height="32" rx="4" class="wbox" /><rect x="16" y="76" width="12" height="12" rx="2" class="wbox" /><rect x="38" y="76" width="120" height="5" rx="2" class="wfill" /><rect x="38" y="86" width="80" height="4" rx="2" class="wfill" /><rect x="220" y="78" width="64" height="8" rx="2" class="wbox" /><rect x="8" y="106" width="284" height="32" rx="4" class="wbox" /><rect x="16" y="116" width="12" height="12" rx="2" class="wbox" /><rect x="38" y="116" width="120" height="5" rx="2" class="wfill" /><rect x="38" y="126" width="80" height="4" rx="2" class="wfill" /><rect x="220" y="118" width="64" height="8" rx="2" class="wbox" /><rect x="8" y="146" width="284" height="32" rx="4" class="wbox" /><rect x="16" y="156" width="12" height="12" rx="2" class="wbox" /><rect x="38" y="156" width="120" height="5" rx="2" class="wfill" /><rect x="38" y="166" width="80" height="4" rx="2" class="wfill" /><rect x="220" y="158" width="64" height="8" rx="2" class="wbox" /></svg><figcaption>Low-fidelity wireframe: one finding per row</figcaption></figure><figure class="frame"><svg viewBox="0 0 300 190" role="img" aria-label="High-fidelity results list with severity, confidence and a suggested fix" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><text x="8" y="16" class="tb" text-anchor="start">Scan results</text><rect x="8" y="24" width="284" height="28" rx="4" class="hbox" /><rect x="16" y="32" width="28" height="12" rx="6" style="fill:#B3261E"/><text x="30" y="41" class="tp" text-anchor="middle" style="font-size:8px">High</text><text x="54" y="42" class="t" text-anchor="start" style="font-size:9.5px">SQL injection · /login</text><rect x="216" y="35" width="52" height="6" rx="3" class="wfill" /><rect x="216" y="35" width="47.84" height="6" rx="3" style="fill:var(--ink)"/><text x="286" y="42" class="tm" text-anchor="end" style="font-size:8.5px">92%</text><rect x="8" y="58" width="284" height="28" rx="4" class="hbox" /><rect x="16" y="66" width="28" height="12" rx="6" style="fill:#B3261E"/><text x="30" y="75" class="tp" text-anchor="middle" style="font-size:8px">High</text><text x="54" y="76" class="t" text-anchor="start" style="font-size:9.5px">Reflected XSS · /search</text><rect x="216" y="69" width="52" height="6" rx="3" class="wfill" /><rect x="216" y="69" width="40.56" height="6" rx="3" style="fill:var(--ink)"/><text x="286" y="76" class="tm" text-anchor="end" style="font-size:8.5px">78%</text><rect x="8" y="92" width="284" height="28" rx="4" class="hbox" /><rect x="16" y="100" width="28" height="12" rx="6" style="fill:#B7791F"/><text x="30" y="109" class="tp" text-anchor="middle" style="font-size:8px">Med</text><text x="54" y="110" class="t" text-anchor="start" style="font-size:9.5px">Missing security headers</text><rect x="216" y="103" width="52" height="6" rx="3" class="wfill" /><rect x="216" y="103" width="33.28" height="6" rx="3" style="fill:var(--ink)"/><text x="286" y="110" class="tm" text-anchor="end" style="font-size:8.5px">64%</text><rect x="8" y="130" width="284" height="52" rx="4" class="hsoft" /><text x="16" y="148" class="tb" text-anchor="start" style="font-size:9.5px">Suggested fix</text><text x="16" y="164" class="t" text-anchor="start" style="font-size:8.5px">Use parameterized queries instead of building SQL from user input.</text></svg><figcaption>High-fidelity: severity, confidence and fix together</figcaption></figure></div><p class="muted small">Findings and confidence values are sample data used to show the layout.</p>
+   <h3>Key decisions</h3>
+   <div class="decide"><b>Severity and confidence shown together</b>A finding shows how serious it is and how sure the scanner is. A confidence-validation step in the pipeline lowers the noise from false positives.</div>
+   <div class="decide"><b>Fix suggestions next to the finding</b>An LLM suggests a fix beside each issue, so the developer doesn't have to leave the screen to work out what to do.</div>
+   <h3>Outcome</h3>
+   <p>A scanner developers can run from the dashboard, the API or their editor, with the same finding format everywhere.</p>
+   <h3>What I'd improve next</h3>
+   <p>Watch developers use the results view for the first time and find where they hesitate.</p>
+  </div>
+ </article>
+</div></section>
+
+<section id="process"><div class="wrap">
+ <div class="sec-head"><h2>How I work</h2></div>
+ <div class="proc">
+  <div><h3>Start with the decision</h3><p>Before drawing screens, I ask what the user is trying to decide or finish, and design the shortest honest path to it.</p></div>
+  <div><h3>Cheap first, polished later</h3><p>Wireframes and rough prototypes settle structure quickly. Visual polish comes after the flow holds up.</p></div>
+  <div><h3>Design for the build</h3><p>Because I also write the front-end, I use components and tokens that developers can adopt directly, and I know what a state costs to build.</p></div>
+  <div><h3>Iterate on feedback</h3><p>Critiques from designers, PMs and engineers are the fastest way to improve a design, so I share early and change it.</p></div>
+ </div>
+</div></section>
+
+<section id="about"><div class="wrap about">
+ <div>
+  <h2>About</h2>
+  <p style="margin-top:16px">I'm studying Computer Science and Engineering at Alva's Institute of Engineering &amp; Technology, Moodbidri (CGPA 9.67/10 up to the 6th semester, graduating 2027). I came to design through building: I kept noticing that the hardest problems in the products I made were about people, not code.</p>
+  <p>I use AI tools in my workflow for research synthesis, ideation and prototyping copy, and I've built with the Anthropic, OpenAI and Mistral APIs.</p>
+ </div>
+ <div>
+  <h3 style="margin-bottom:12px">Recognition</h3>
+  <ul>
+   <li>Winner, Jagruti Safety Ideathon 2025, leading an 8-member team</li>
+   <li>Finalist, Incub8 Hackathon 2025 (top 25 of 308, NITK)</li>
+   <li>IEEE CICN-2025 publication, IEEE Xplore, Feb 2026</li>
+   <li>Top 1% (98th percentile), Programming in Java, NPTEL IIT Kharagpur</li>
+  </ul>
+  <h3 style="margin:24px 0 12px">Also</h3>
+  <ul><li>Infosys Springboard AI/ML virtual internship: a 6-member team, 3 two-week milestones</li></ul>
+ </div>
+</div></section>
+</main>
+
+<footer id="contact"><div class="wrap">
+ <h2>Let's talk</h2>
+ <p style="margin-top:14px">I'd like to bring this way of working to a product team. Write to me at <a href="mailto:fernandesjosna2005@gmail.com">fernandesjosna2005@gmail.com</a> or find me on <a href="https://linkedin.com/in/josnafernandes">LinkedIn</a> and <a href="https://github.com/Josna126">GitHub</a>.</p>
+</div></footer>
+
+<script>
+(function(){
+ var p=document.getElementById('phone'),w=document.getElementById('bWire'),h=document.getElementById('bHi'),bar=p.querySelector('.bar i');
+ function set(m){p.setAttribute('data-mode',m);w.setAttribute('aria-pressed',m==='wire');h.setAttribute('aria-pressed',m==='hi');bar.style.width=m==='wire'?'33%':'33%';}
+ w.addEventListener('click',function(){set('wire')});
+ h.addEventListener('click',function(){set('hi')});
+ set('wire');
+})();
+</script>
+</body>
+</html>
